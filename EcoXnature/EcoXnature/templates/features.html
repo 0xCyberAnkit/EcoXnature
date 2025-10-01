@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenSpark - Features & Innovation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden;
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header with full navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <span class="text-3xl font-extrabold text-green-600">GreenSpark</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="/about" class="hover:text-green-600 transition-colors duration-200">About</a>
+                    <a href="/features" class="text-green-600 font-bold">Features</a>
+                    <a href="/games" class="text-green-600 font-bold">Games</a>
+                </div>
+            </div>
+            <a href="greenspark.html" class="px-5 py-2.5 rounded-full text-white bg-green-500 hover:bg-green-600 font-medium transition-colors duration-300">
+                Login
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-green-500 py-20 md:py-24 text-center text-white animate-fade-in relative overflow-hidden">
+            <div class="container mx-auto px-6 z-10 relative">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                    Features & Innovation
+                </h1>
+                <p class="mt-4 text-xl font-light max-w-2xl mx-auto">
+                    The technology and ideas driving a greener future.
+                </p>
+            </div>
+            <!-- 3D Planet Canvas -->
+            <canvas id="planet-canvas" class="absolute inset-0 w-full h-full opacity-50 z-0"></canvas>
+        </section>
+
+        <!-- Core Features Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 animate-fade-in-up">What We Offer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6 rounded-xl bg-white shadow-md animate-fade-in-up">
+                        <div class="text-5xl mb-4 text-green-500">🎮</div>
+                        <h3 class="text-xl font-semibold mb-2">Gamified Learning</h3>
+                        <p class="text-gray-600">Engaging quizzes, badges, and levels that turn environmental education into a fun game.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-white shadow-md animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <div class="text-5xl mb-4 text-blue-500">✅</div>
+                        <h3 class="text-xl font-semibold mb-2">Proof-Based Challenges</h3>
+                        <p class="text-gray-600">Complete real-world eco-tasks and upload photo proof for verification and points.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-white shadow-md animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <div class="text-5xl mb-4 text-yellow-500">📈</div>
+                        <h3 class="text-xl font-semibold mb-2">Dynamic Leaderboards</h3>
+                        <p class="text-gray-600">Compete with friends and schools on live leaderboards to see who makes the biggest impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Innovation Section -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 animate-fade-in-up">Innovation in Action</h2>
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                    <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0 animate-fade-in-up">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">AI-Powered Challenges</h3>
+                        <p class="text-gray-600 leading-relaxed">We use the **Gemini API** to generate unique, personalized eco-challenges. This ensures a fresh and endless supply of ideas to keep users engaged and learning.</p>
+                    </div>
+                    <div class="md:w-1/2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://placehold.co/500x300/e9f5ed/34d399?text=AI+Challenges" alt="AI Challenge graphic" class="rounded-2xl shadow-lg">
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row-reverse items-center justify-between">
+                    <div class="md:w-1/2 md:pl-10 mb-6 md:mb-0 animate-fade-in-up">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Real-Time Impact Tracking</h3>
+                        <p class="text-gray-600 leading-relaxed">Our platform provides live, measurable data on your environmental contributions. See your impact grow in real-time as you complete challenges and earn points.</p>
+                    </div>
+                    <div class="md:w-1/2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://placehold.co/500x300/e9f5ed/34d399?text=Real-time+Impact" alt="Real-time impact graphic" class="rounded-2xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section (New Interactive Feature) -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 animate-fade-in-up">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            What is GreenSpark?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">GreenSpark is a gamified environmental education platform that empowers individuals and communities to take eco-friendly actions and earn rewards for their positive impact on the planet.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            How do I earn points?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">You earn points by completing eco-challenges, participating in quizzes, and contributing to community projects. Points can be redeemed for various rewards and benefits.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            Is the platform free to use?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">Yes, GreenSpark is completely free for individual users. We partner with educational institutions and corporate sponsors to support the platform.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Vision Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-8 animate-fade-in-up">Our Future Vision</h2>
+                <p class="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto animate-fade-in-up">
+                    We're just getting started. Our roadmap includes launching a dedicated mobile application, partnering with corporate sponsors for bigger rewards, and integrating with educational institutions to make GreenSpark a core part of their curriculum.
+                </p>
+                <div class="mt-8 flex justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <img src="https://placehold.co/600x400/34d399/ffffff?text=Our+Future" alt="Future vision graphic" class="rounded-2xl shadow-lg">
+                </div>
+            </div>
+        </section>
+
+        <!-- Call-to-Action Section -->
+        <section class="py-16 md:py-24 bg-green-500 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Make a Difference?</h2>
+                <p class="text-lg md:text-xl mb-8">Join the GreenSpark community today and start your journey towards a greener planet!</p>
+                <a href="greenspark.html" class="px-8 py-4 rounded-full text-green-700 bg-white hover:bg-gray-100 font-bold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                    Start Your Eco-Journey
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 GreenSpark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Impact Counter Animation
+        const counters = document.querySelectorAll('[data-counter]');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-counter'), 10);
+                    let count = 0;
+                    const increment = target / 200; // Adjust for faster/slower animation
+
+                    const updateCounter = () => {
+                        count += increment;
+                        if (count < target) {
+                            counter.textContent = Math.ceil(count).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                        }
+                    };
+
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Three.js Planet Animation
+        window.onload = function() {
+            const canvas = document.getElementById('planet-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / canvas.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
+            // Create a simple green sphere to represent the planet
+            const geometry = new THREE.SphereGeometry(1.5, 32, 32);
+            const material = new THREE.MeshBasicMaterial({ color: 0x34d399, transparent: true, opacity: 0.8 });
+            const planet = new THREE.Mesh(geometry, material);
+            scene.add(planet);
+
+            camera.position.z = 5;
+
+            // Animation loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+                planet.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            };
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const width = canvas.clientWidth;
+                const height = canvas.clientHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            });
+
+            animate();
+        };
+    </script>
+</body>
+</html>

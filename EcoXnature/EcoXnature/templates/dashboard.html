@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoXnature - Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden; /* Prevent horizontal scroll on some animations */
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .progress-bar-fill {
+            transition: width 1.5s ease-out;
+        }
+        .plant-leaf {
+            transform-origin: bottom center;
+            opacity: 0;
+            animation: growLeaf 1.5s ease-out forwards;
+        }
+        .plant-pot {
+            transform-origin: bottom center;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes growLeaf {
+            0% { transform: scaleY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+        .rotate-planet {
+            animation: rotatePlanet 30s linear infinite;
+        }
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #4ade80;
+            opacity: 0;
+            animation: confetti-fall 2s ease-out forwards;
+            border-radius: 50%;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
+            100% { transform: translateY(200px) rotateZ(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <!-- Animated Planet Icon -->
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <svg class="rotate-planet" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 11C10.34 11 9 12.34 9 14C9 15.66 10.34 17 12 17C13.66 17 15 15.66 15 14C15 12.34 13.66 11 12 11Z" fill="#22C55E"/>
+                        </svg>
+                    </div>
+                    <span class="text-3xl font-extrabold text-green-600">EcoXnature</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="/about" class="hover:text-green-600 transition-colors duration-200">About</a>
+                    <a href="/features" class="hover:text-green-600 transition-colors duration-200">Features</a>
+                    <a href="/dashboard" class="text-green-600 font-bold">Dashboard</a>
+                    <a href="/games" class="text-green-600 font-bold">Games</a>
+                </div>
+            </div>
+            <a href="login.html" id="logout-btn" class="px-5 py-2.5 rounded-full text-white bg-red-500 hover:bg-red-600 font-medium transition-colors duration-300">
+                Logout
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg fade-in">
+            <!-- Hero Section -->
+            <div class="mb-12">
+                <h1 class="text-4xl font-extrabold text-green-700 mb-2">Welcome, <span id="user-name"></span>!</h1>
+                <p class="text-lg text-gray-600 mb-8">Your journey to a greener planet continues.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- User Profile Card -->
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-inner fade-in hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.1s;">
+                        <h2 class="text-xl font-bold text-green-700 mb-4">Your Profile</h2>
+                        <p class="text-gray-600"><span class="font-medium">Email:</span> <span id="user-email"></span></p>
+                        <p class="text-gray-600"><span class="font-medium">Total Points:</span> <span id="user-points" class="font-bold text-green-600 text-3xl">0</span></p>
+                    </div>
+
+                    <!-- Eco-Impact Summary Card -->
+                    <div class="bg-gray-100 p-6 rounded-xl shadow-inner fade-in hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.2s;">
+                        <h2 class="text-xl font-bold text-green-700 mb-4">Eco-Impact Summary</h2>
+                        <p class="text-gray-600"><span class="font-medium">Challenges Completed:</span> <span id="completed-challenges" class="font-bold text-2xl">0</span></p>
+                        <p class="text-gray-600"><span class="font-medium">Trees Planted:</span> <span id="trees-planted" class="font-bold text-2xl">0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini API Features Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Daily Eco-Tip Feature -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md fade-in hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.3s;">
+                    <h2 class="text-2xl font-bold text-green-700 mb-4">💡 Daily Eco-Tip</h2>
+                    <div id="eco-tip-output" class="text-lg text-gray-700">
+                        Click the button below to get an insightful eco-tip.
+                    </div>
+                    <button id="generateEcoTipBtn" class="mt-4 px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                        Generate New Tip ✨
+                    </button>
+                </div>
+
+                <!-- Daily Challenge Generator -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md fade-in hover:shadow-lg transition-shadow duration-300" style="animation-delay: 0.4s;">
+                    <h2 class="text-2xl font-bold text-green-700 mb-4">🌱 Daily Challenge Generator</h2>
+                    <div id="challenge-output" class="text-lg text-gray-700">
+                        Generate a new challenge to boost your points!
+                    </div>
+                    <button id="generateChallengeBtn" class="mt-4 px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                        Generate New Challenge ✨
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gamified Progress Section -->
+            <div class="bg-green-100 p-6 md:p-8 rounded-2xl shadow-md mb-8 fade-in" style="animation-delay: 0.5s;">
+                <h2 class="text-2xl font-bold text-green-700 mb-4">Your Eco-Progress</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="w-full md:w-1/2 flex-shrink-0">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700">Points to Next Level: <span id="points-to-next" class="font-bold"></span></span>
+                            <span class="text-sm font-medium text-gray-700">Level <span id="current-level" class="font-bold">1</span></span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div id="progress-bar" class="bg-green-500 h-2.5 rounded-full progress-bar-fill" style="width: 0;"></div>
+                        </div>
+                    </div>
+                    <div class="w-48 h-48 flex-shrink-0">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <!-- Pot -->
+                            <path d="M 20 85 Q 25 100 50 100 T 80 85" fill="#a0522d" class="plant-pot" style="animation-delay: 0.6s;"/>
+                            <!-- Leaves -->
+                            <path d="M 50 85 Q 40 60 25 55 Q 35 45 50 40 L 50 85 Z" fill="#4ade80" class="plant-leaf" style="animation-delay: 0.7s;"/>
+                            <path d="M 50 85 Q 60 60 75 55 Q 65 45 50 40 L 50 85 Z" fill="#4ade80" class="plant-leaf" style="animation-delay: 0.8s;"/>
+                            <path d="M 50 85 Q 35 50 30 30 Q 50 35 50 20 L 50 85 Z" fill="#22c55e" class="plant-leaf" style="animation-delay: 0.9s;"/>
+                            <path d="M 50 85 Q 65 50 70 30 Q 50 35 50 20 L 50 85 Z" fill="#22c55e" class="plant-leaf" style="animation-delay: 1.0s;"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="mt-2 text-xl font-bold text-green-700 text-center">Your Eco-Plant is Growing!</p>
+            </div>
+
+            <!-- Recent Activity/Challenges Section -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md fade-in" style="animation-delay: 0.7s;">
+                <h2 class="text-2xl font-bold text-green-700 mb-6">Recent Challenges</h2>
+                <div id="challenges-list" class="space-y-4">
+                    <!-- Dynamic challenge content will be injected here -->
+                    <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between hover:scale-105 transition-transform duration-300 cursor-pointer">
+                        <div>
+                            <p class="font-medium text-gray-800">Challenge: Plant a Tree</p>
+                            <p class="text-sm text-gray-500">Status: <span class="text-green-600 font-semibold">Completed</span></p>
+                        </div>
+                        <span class="text-sm font-bold text-green-600">+100 Points</span>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg flex items-center justify-between hover:scale-105 transition-transform duration-300 cursor-pointer">
+                        <div>
+                            <p class="font-medium text-gray-800">Challenge: Reduce Plastic Usage</p>
+                            <p class="text-sm text-gray-500">Status: <span class="text-yellow-600 font-semibold">In Progress</span></p>
+                        </div>
+                        <span class="text-sm font-bold text-yellow-600">...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6 mt-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 EcoXnature. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userNameEl = document.getElementById('user-name');
+            const userEmailEl = document.getElementById('user-email');
+            const userPointsEl = document.getElementById('user-points');
+            const completedChallengesEl = document.getElementById('completed-challenges');
+            const treesPlantedEl = document.getElementById('trees-planted');
+            const progressBar = document.getElementById('progress-bar');
+            const pointsToNextEl = document.getElementById('points-to-next');
+            const currentLevelEl = document.getElementById('current-level');
+            const logoutBtn = document.getElementById('logout-btn');
+            const ecoTipOutput = document.getElementById('eco-tip-output');
+            const generateEcoTipBtn = document.getElementById('generateEcoTipBtn');
+            const challengeOutput = document.getElementById('challenge-output');
+            const generateChallengeBtn = document.getElementById('generateChallengeBtn');
+            const plantLeaves = document.querySelectorAll('.plant-leaf');
+
+            // Simulating user data
+            const userEmail = localStorage.getItem('userEmail') || 'Guest';
+            const userName = userEmail.split('@')[0];
+            const userPoints = 1250;
+            const completedChallenges = 22;
+            const treesPlanted = 5;
+
+            // Display initial user info
+            userNameEl.textContent = userName;
+            userEmailEl.textContent = userEmail;
+
+            // Animate counters
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.textContent = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            animateValue(userPointsEl, 0, userPoints, 2000);
+            animateValue(completedChallengesEl, 0, completedChallenges, 2000);
+            animateValue(treesPlantedEl, 0, treesPlanted, 2000);
+
+            // Animate progress bar
+            const maxPointsPerLevel = 2000;
+            const currentLevel = Math.floor(userPoints / maxPointsPerLevel) + 1;
+            const pointsInCurrentLevel = userPoints % maxPointsPerLevel;
+            const progressPercentage = (pointsInCurrentLevel / maxPointsPerLevel) * 100;
+            const pointsToNext = maxPointsPerLevel - pointsInCurrentLevel;
+
+            currentLevelEl.textContent = currentLevel;
+            pointsToNextEl.textContent = pointsToNext;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            // Animate plant growth based on progress
+            const maxLeaves = plantLeaves.length;
+            const leavesToShow = Math.min(Math.floor((userPoints / 2500) * maxLeaves), maxLeaves); // Simple logic
+            plantLeaves.forEach((leaf, index) => {
+                if (index < leavesToShow) {
+                    leaf.style.animationName = 'growLeaf';
+                    leaf.style.animationDelay = `${0.6 + (index * 0.1)}s`;
+                }
+            });
+
+            // Handle logout
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userPassword');
+                window.location.href = 'login.html';
+            });
+
+            // Gemini API integration for generating eco tips
+            const apiKey = "AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            async function getNewEcoTip() {
+                ecoTipOutput.innerHTML = '<span class="animate-pulse">Generating an eco-tip...</span>';
+                generateEcoTipBtn.disabled = true;
+
+                const prompt = "Generate a single, unique, and actionable daily eco-tip. Do not include any extra text, just the tip itself. Start with 'Tip:' and keep it concise and friendly.";
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                };
+
+                let retries = 0;
+                const maxRetries = 5;
+                let success = false;
+
+                while (retries < maxRetries && !success) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                        if (text) {
+                            ecoTipOutput.textContent = text;
+                            success = true;
+                        } else {
+                            ecoTipOutput.textContent = 'Sorry, something went wrong. Please try again.';
+                        }
+
+                    } catch (error) {
+                        console.error('Error generating eco-tip:', error);
+                        retries++;
+                        await new Promise(res => setTimeout(res, Math.pow(2, retries) * 1000));
+                    }
+                }
+                generateEcoTipBtn.disabled = false;
+            }
+
+            // Gemini API integration for generating eco challenges
+            async function getNewEcoChallenge() {
+                challengeOutput.innerHTML = '<span class="animate-pulse">Generating a new challenge...</span>';
+                generateChallengeBtn.disabled = true;
+
+                const prompt = "Generate a single, unique, and actionable daily eco-challenge. Do not include any extra text, just the challenge itself. Start with 'Challenge:' and keep it concise and friendly.";
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                };
+
+                let retries = 0;
+                const maxRetries = 5;
+                let success = false;
+
+                while (retries < maxRetries && !success) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                        if (text) {
+                            challengeOutput.textContent = text;
+                            success = true;
+                        } else {
+                            challengeOutput.textContent = 'Sorry, something went wrong. Please try again.';
+                        }
+
+                    } catch (error) {
+                        console.error('Error generating eco-challenge:', error);
+                        retries++;
+                        await new Promise(res => setTimeout(res, Math.pow(2, retries) * 1000));
+                    }
+                }
+                generateChallengeBtn.disabled = false;
+            }
+
+            generateEcoTipBtn.addEventListener('click', getNewEcoTip);
+            generateChallengeBtn.addEventListener('click', getNewEcoChallenge);
+        });
+    </script>
+</body>
+</html>

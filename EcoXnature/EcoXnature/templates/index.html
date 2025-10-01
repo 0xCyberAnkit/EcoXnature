@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoXnature - Learn, Play, Save Our Planet</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; /* Light green background */
+        }
+        .hero-bg-animation {
+            background: linear-gradient(-45deg, #a7f3d0, #6ee7b7, #34d399, #10b981);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out forwards;
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-pop-in {
+            animation: popIn 0.5s ease-out forwards;
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <span class="text-3xl font-extrabold text-green-600">EcoXnature</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="text-green-600 font-bold">Home</a>
+                    <a href="/about" class="hover:text-green-600 transition-colors duration-200">About</a>
+                    <a href="/features" class="hover:text-green-600 transition-colors duration-200">Features</a>
+                    <a href="/games" class="hover:text-green-600 transition-colors duration-200">Games</a>
+                </div>
+            </div>
+            <a href="greenspark.html" class="px-5 py-2.5 rounded-full text-white bg-green-500 hover:bg-green-600 font-medium transition-colors duration-300">
+                Login
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg-animation py-20 md:py-32 text-center text-white">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">
+                    EcoXnature: Learn, Play, Save Our Planet!
+                </h1>
+                <p class="text-lg md:text-xl font-light mb-8 max-w-2xl mx-auto animate-fade-in">
+                    Transform environmental education into a fun, rewarding, and impactful journey. Complete eco-challenges, earn points, and make a real difference.
+                </p>
+                <a href="/dashboard" class="px-8 py-4 rounded-full text-green-700 bg-white hover:bg-gray-100 font-bold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                    Start Your Eco-Journey
+                </a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12">How it Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+                        <div class="inline-block p-4 rounded-full bg-green-200 text-green-700 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2.5a2.5 2.5 0 0 1-2.5 2.5H6.5A2.5 2.5 0 0 1 4 19.5z" />
+                                <path d="M14.5 17a2.5 2.5 0 0 0 0-5H6.5a2.5 2.5 0 0 1 0-5H20v2.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Gamified Learning</h3>
+                        <p class="text-gray-600">Dive into interactive modules and quizzes to learn about the environment in a fun way. Learning is no longer a chore!</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+                        <div class="inline-block p-4 rounded-full bg-blue-200 text-blue-700 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zM12 18V6" />
+                                <path d="M17 13c-2.73 0-5.26 1.1-7.1 2.9A9.97 9.97 0 0 0 5 19" />
+                                <path d="M12 6a7 7 0 0 0-7 7" />
+                                <path d="M15 10a7 7 0 0 0 7 7" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Complete Challenges</h3>
+                        <p class="text-gray-600">Take on real-world eco-challenges, from planting trees to reducing waste. Upload proof to get verified and earn rewards!</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+                        <div class="inline-block p-4 rounded-full bg-yellow-200 text-yellow-700 mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.38a2 2 0 0 1 1.41.59l3.62 3.62A2 2 0 0 1 22 7.62z" />
+                                <path d="M15 13H9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-3">Track Your Progress</h3>
+                        <p class="text-gray-600">See your environmental impact grow with every completed challenge. Monitor your points and climb the leaderboard!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gemini API Feature -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg text-center">
+                    <h3 class="text-3xl font-bold text-green-700 mb-4">✨ Need an Eco-Challenge Idea? ✨</h3>
+                    <p class="text-gray-600 mb-6">Click the button below to get a unique, fun challenge idea generated by Gemini!</p>
+                    <button id="generateChallengeBtn" class="px-8 py-4 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                        Generate New Challenge ✨
+                    </button>
+                    <div id="challengeOutput" class="mt-8 text-center text-lg font-medium text-gray-700">
+                        <!-- Challenge idea will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Counter Section -->
+        <section class="py-16 md:py-24 bg-green-600 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12">Our Impact So Far</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="animate-pop-in">
+                        <div class="text-5xl md:text-6xl font-extrabold" data-counter="1200">0</div>
+                        <p class="text-lg md:text-xl mt-2 font-medium">Trees Planted</p>
+                    </div>
+                    <div class="animate-pop-in">
+                        <div class="text-5xl md:text-6xl font-extrabold" data-counter="3500">0</div>
+                        <p class="text-lg md:text-xl mt-2 font-medium">Challenges Completed</p>
+                    </div>
+                    <div class="animate-pop-in">
+                        <div class="text-5xl md:text-6xl font-extrabold" data-counter="15000">0</div>
+                        <p class="text-lg md:text-xl mt-2 font-medium">Community Members</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-1/2 text-center md:text-left mb-6 md:mb-0">
+                        <h3 class="text-3xl font-bold text-green-700">Join the Movement</h3>
+                        <p class="mt-2 text-gray-600">Stay updated on new challenges, learn from experts, and connect with a global community of eco-warriors.</p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <form id="newsletter-form" class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                            <input type="email" placeholder="Enter your email" required class="flex-grow px-5 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <button type="submit" class="px-8 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">Subscribe</button>
+                        </form>
+                        <p id="form-message" class="text-sm text-center md:text-left mt-2 text-green-600 hidden"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 EcoXnature. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Impact Counter Animation
+        const counters = document.querySelectorAll('[data-counter]');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-counter'), 10);
+                    let count = 0;
+                    const increment = target / 200; // Adjust for faster/slower animation
+
+                    const updateCounter = () => {
+                        count += increment;
+                        if (count < target) {
+                            counter.textContent = Math.ceil(count).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                        }
+                    };
+
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, {
+            threshold: 0.5 // Trigger when 50% of the element is visible
+        });
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Newsletter Form Submission
+        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageEl = document.getElementById('form-message');
+            messageEl.textContent = 'Thanks for subscribing! We\'ll keep you updated.';
+            messageEl.classList.remove('hidden');
+            this.reset();
+            setTimeout(() => {
+                messageEl.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Gemini API integration for generating challenge ideas
+        const generateChallengeBtn = document.getElementById('generateChallengeBtn');
+        const challengeOutput = document.getElementById('challengeOutput');
+
+        // Gemini API configuration
+        const apiKey = "AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs";
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        // Function to call the Gemini API
+        async function getNewChallengeIdea() {
+            // Set loading state
+            challengeOutput.innerHTML = '<span class="animate-pulse">Generating a new challenge idea...</span>';
+            generateChallengeBtn.disabled = true;
+
+            const prompt = "Generate a single, fun, and creative environmental challenge for a gamified education platform. Do not include any extra text, just the challenge title and a short description. Format the response as a single, friendly paragraph.";
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+            };
+
+            // Exponential backoff for API calls
+            let retries = 0;
+            const maxRetries = 5;
+            let success = false;
+
+            while (retries < maxRetries && !success) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (text) {
+                        challengeOutput.textContent = text;
+                        success = true;
+                    } else {
+                        challengeOutput.textContent = 'Sorry, something went wrong. Please try again.';
+                    }
+
+                } catch (error) {
+                    console.error('Error generating challenge:', error);
+                    retries++;
+                    await new Promise(res => setTimeout(res, Math.pow(2, retries) * 1000));
+                }
+            }
+
+            // Reset button state
+            generateChallengeBtn.disabled = false;
+        }
+
+        // Add event listener to the button
+        generateChallengeBtn.addEventListener('click', getNewChallengeIdea);
+
+    </script>
+</body>
+</html>

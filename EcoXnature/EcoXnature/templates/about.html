@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About EcoXnature</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden;
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header with full navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <span class="text-3xl font-extrabold text-green-600">EcoXnature</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="/about" class="text-green-600 font-bold">About</a>
+                    <a href="/features" class="hover:text-green-600 transition-colors duration-200">Features</a>
+                    <a href="/games" class="hover:text-green-600 transition-colors duration-200">Games</a>
+                </div>
+            </div>
+            <a href="greenspark.html" class="px-5 py-2.5 rounded-full text-white bg-green-500 hover:bg-green-600 font-medium transition-colors duration-300">
+                Login
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-green-500 py-20 md:py-24 text-center text-white animate-fade-in">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+                    Our Mission
+                </h1>
+                <p class="mt-4 text-xl font-light max-w-2xl mx-auto">
+                    Empowering a generation to create a positive impact on the environment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0 animate-fade-in-up">
+                        <img src="https://placehold.co/600x400/34d399/ffffff?text=Our+Story" alt="Our story graphic" class="rounded-2xl shadow-lg">
+                    </div>
+                    <div class="md:w-1/2 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">A Journey of Impact</h2>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            EcoXnature was born from a simple idea: to make environmental action accessible, fun, and rewarding. We saw a gap between wanting to help the planet and knowing where to start. Our platform bridges that gap by turning eco-friendly actions into a gamified journey of discovery and impact.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Impact Section with Counters -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-12 animate-fade-in-up">Our Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-8 rounded-xl bg-white shadow-lg animate-fade-in-up">
+                        <p class="text-5xl font-extrabold text-green-600" data-counter="5000">0</p>
+                        <h3 class="mt-2 text-xl font-semibold text-gray-600">Challenges Completed</h3>
+                    </div>
+                    <div class="p-8 rounded-xl bg-white shadow-lg animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <p class="text-5xl font-extrabold text-green-600" data-counter="25000">0</p>
+                        <h3 class="mt-2 text-xl font-semibold text-gray-600">Kg of CO2 Saved</h3>
+                    </div>
+                    <div class="p-8 rounded-xl bg-white shadow-lg animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <p class="text-5xl font-extrabold text-green-600" data-counter="1000">0</p>
+                        <h3 class="mt-2 text-xl font-semibold text-gray-600">Active Users</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Team Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-12 animate-fade-in-up">Meet Our Team</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="animate-fade-in-up">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+1" alt="Team Member 1" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ankit Chandok</h3>
+                        <p class="text-green-600">Backend Developer</p>
+                        <p class="mt-2 text-sm text-gray-600">A passionate environmentalist with a vision to gamify eco-friendly actions.</p>
+                    </div>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+2" alt="Team Member 2" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Divyanshi Verma</h3>
+                        <p class="text-green-600">Frontend Developer</p>
+                        <p class="mt-2 text-sm text-gray-600">Leads our tech team, ensuring a seamless and innovative platform experience.</p>
+                    </div>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+3" alt="Team Member 3" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ayush Tripathi</h3>
+                        <p class="text-green-600">Frontend Developer</p>
+                        <p class="mt-2 text-sm text-gray-600">Drives our mission to reach a wider audience and inspire more people.</p>
+                    </div>
+                    <div class="animate-fade-in-up">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+1" alt="Team Member 1" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ayush Singh</h3>
+                        <p class="text-green-600">Database Manager</p>
+                        <p class="mt-2 text-sm text-gray-600">A passionate environmentalist with a vision to gamify eco-friendly actions.</p>
+                    </div>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+2" alt="Team Member 2" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Ananya </h3>
+                        <p class="text-green-600">Database Manager</p>
+                        <p class="mt-2 text-sm text-gray-600">Leads our tech team, ensuring a seamless and innovative platform experience.</p>
+                    </div>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <img src="https://placehold.co/200x200/d1fae5/10b981?text=Team+Member+3" alt="Team Member 3" class="rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-xl font-semibold text-gray-800">Aman</h3>
+                        <p class="text-green-600">Graphics Des</p>
+                        <p class="mt-2 text-sm text-gray-600">Drives our mission to reach a wider audience and inspire more people.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Did You Know? - Gemini API Feature -->
+        <section class="py-16 md:py-24 bg-green-500 text-white text-center">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Did You Know?</h2>
+                <p class="text-lg md:text-xl mb-8">
+                    Learn an interesting eco-fact.
+                </p>
+                <button id="generate-fact" class="px-8 py-4 rounded-full text-green-700 bg-white hover:bg-gray-100 font-bold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                    Generate an Eco-Fact ✨
+                </button>
+                <div id="fact-container" class="mt-10 p-6 bg-white rounded-xl shadow-lg transition-all duration-300 transform scale-0 opacity-0">
+                    <p id="fact-text" class="text-lg text-gray-700 font-medium italic"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 md:py-24 bg-gray-100">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 animate-fade-in-up">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            What is EcoXnature?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">EcoXnature is a gamified environmental education platform that empowers individuals and communities to take eco-friendly actions and earn rewards for their positive impact on the planet.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            How do I earn points?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">You earn points by completing eco-challenges, participating in quizzes, and contributing to community projects. Points can be redeemed for various rewards and benefits.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl shadow-md p-6 cursor-pointer hover:bg-gray-50 transition-colors duration-300">
+                        <summary class="flex justify-between items-center font-semibold text-lg text-green-600 list-none">
+                            Is the platform free to use?
+                            <span class="transition-transform duration-300 transform group-open:rotate-180">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                        </summary>
+                        <p class="mt-4 text-gray-600">Yes, EcoXnature is completely free for individual users. We partner with educational institutions and corporate sponsors to support the platform.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call-to-Action Section -->
+        <section class="py-16 md:py-24 bg-green-500 text-white text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Make a Difference?</h2>
+                <p class="text-lg md:text-xl mb-8">Join the EcoXnature community today and start your journey towards a greener planet!</p>
+                <a href="greenspark.html" class="px-8 py-4 rounded-full text-green-700 bg-white hover:bg-gray-100 font-bold text-lg shadow-lg transition-transform duration-300 transform hover:scale-105">
+                    Start Your Eco-Journey
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 EcoXnature. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Impact Counter Animation
+        const counters = document.querySelectorAll('[data-counter]');
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-counter'), 10);
+                    let count = 0;
+                    const increment = target / 200;
+
+                    const updateCounter = () => {
+                        count += increment;
+                        if (count < target) {
+                            counter.textContent = Math.ceil(count).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString();
+                        }
+                    };
+
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+
+        // Gemini API Call for Eco-Fact
+        document.getElementById('generate-fact').addEventListener('click', async () => {
+            const factContainer = document.getElementById('fact-container');
+            const factText = document.getElementById('fact-text');
+            factText.textContent = 'Generating a new eco-fact...';
+            factContainer.classList.add('scale-100', 'opacity-100');
+
+            const userQuery = "Generate a short, unique, and scientifically accurate fact about the environment or conservation. The fact should be less than 50 words and do not include introductory phrases like 'Did you know?' or 'Fact:'.";
+            const apiKey = "AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: userQuery }]
+                }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: "You are a helpful assistant that provides short, verifiable facts about the environment." }]
+                },
+            };
+
+            let retries = 0;
+            const maxRetries = 3;
+
+            async function fetchWithRetry(url, options) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    if (retries < maxRetries) {
+                        retries++;
+                        const delay = Math.pow(2, retries) * 1000;
+                        await new Promise(res => setTimeout(res, delay));
+                        return fetchWithRetry(url, options);
+                    } else {
+                        throw error;
+                    }
+                }
+            }
+
+            try {
+                const response = await fetchWithRetry(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
+                    factText.textContent = text;
+                } else {
+                    factText.textContent = 'Sorry, I couldn\'t generate a fact right now. Please try again later.';
+                }
+            } catch (error) {
+                console.error('Failed to fetch from Gemini API:', error);
+                factText.textContent = 'Sorry, an error occurred. Please try again later.';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoXnature - Memory Match</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden;
+        }
+        .rotate-planet {
+            animation: rotatePlanet 30s linear infinite;
+        }
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .card-container {
+            perspective: 1000px;
+        }
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card-container.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            user-select: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        .card-face.back {
+            background-color: #34d399; /* Green 400 */
+            color: white;
+            transform: rotateY(180deg);
+        }
+        .card-face.front {
+            background-color: #ecfdf5; /* Green 50 */
+            color: #166534; /* Green 800 */
+            border: 3px solid #166534;
+        }
+        .card-face:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        #fact-message-box {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            padding: 1rem;
+        }
+        .fact-message-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <svg class="rotate-planet" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 11C10.34 11 9 12.34 9 14C9 15.66 10.34 17 12 17C13.66 17 15 15.66 15 14C15 12.34 13.66 11 12 11Z" fill="#22C55E"/>
+                        </svg>
+                    </div>
+                    <span class="text-3xl font-extrabold text-green-600">EcoXnature</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="/about" class="hover:text-green-600 transition-colors duration-200">About</a>
+                    <a href="/features" class="hover:text-green-600 transition-colors duration-200">Features</a>
+                    <a href="/dashboard" class="hover:text-green-600 transition-colors duration-200">Dashboard</a>
+                    <a href="/games" class="text-green-600 font-bold">Games</a>
+                </div>
+            </div>
+            <a href="login.html" id="logout-btn" class="px-5 py-2.5 rounded-full text-white bg-red-500 hover:bg-red-600 font-medium transition-colors duration-300">
+                Logout
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg">
+            <!-- Memory Match Game -->
+            <div class="mb-12">
+                <h1 class="text-4xl font-extrabold text-green-700 mb-4 text-center">🌳 Eco-Memory Match</h1>
+                <p class="text-lg text-gray-600 mb-8 text-center">Match the pairs of eco-friendly items to complete the challenge!</p>
+
+                <!-- Game Stats and Controls -->
+                <div class="flex flex-col sm:flex-row items-center justify-between mb-8 p-6 rounded-xl bg-gray-100 shadow-inner">
+                    <div class="text-lg font-medium text-gray-700 mb-4 sm:mb-0">
+                        Moves: <span id="moves" class="font-bold text-green-600">0</span>
+                    </div>
+                    <div class="text-lg font-medium text-gray-700">
+                        Matches: <span id="matches" class="font-bold text-green-600">0</span>
+                    </div>
+                    <button id="restart-btn" class="mt-4 sm:mt-0 px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                        Restart Game
+                    </button>
+                </div>
+
+                <!-- Game Board -->
+                <div id="game-board" class="grid grid-cols-4 sm:grid-cols-6 gap-4 justify-center items-center">
+                    <!-- Cards will be dynamically inserted here -->
+                </div>
+
+                <!-- Win Message Box -->
+                <div id="message-box" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl text-center">
+                        <h3 class="text-3xl font-extrabold text-green-700 mb-4">Congratulations! 🎉</h3>
+                        <p class="text-xl text-gray-700 mb-6">You matched all the cards in <span id="final-moves" class="font-bold text-green-600"></span> moves!</p>
+                        <button onclick="document.getElementById('message-box').classList.add('hidden');" class="px-8 py-4 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                            Play Again!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fact Message Box (Gemini API powered) -->
+                <div id="fact-message-box" class="hidden">
+                    <div class="fact-message-content">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">Did you know? ✨</h3>
+                        <p id="fact-text" class="text-lg text-gray-700 mb-4"></p>
+                        <button id="fact-close-btn" class="px-6 py-2 rounded-full text-white bg-green-500 hover:bg-green-600 font-medium transition-colors duration-300">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6 mt-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 EcoXnature. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameBoard = document.getElementById('game-board');
+            const movesEl = document.getElementById('moves');
+            const matchesEl = document.getElementById('matches');
+            const restartBtn = document.getElementById('restart-btn');
+            const messageBox = document.getElementById('message-box');
+            const finalMovesEl = document.getElementById('final-moves');
+            const factMessageBox = document.getElementById('fact-message-box');
+            const factText = document.getElementById('fact-text');
+            const factCloseBtn = document.getElementById('fact-close-btn');
+
+            // I've added a more forceful way to hide the fact box on load to prevent it from appearing.
+            // This should fix the issue with the screen getting stuck.
+            factMessageBox.style.display = 'none';
+
+            const ecoIcons = ['🌳', '💧', '♻️', '🌍', '☀️', '🌱', '🔋', '🌸'];
+            const iconToTopic = {
+                '🌳': 'trees',
+                '💧': 'water conservation',
+                '♻️': 'recycling',
+                '🌍': 'the Earth',
+                '☀️': 'solar power',
+                '🌱': 'plant growth',
+                '🔋': 'renewable energy',
+                '🌸': 'flowers and pollination'
+            };
+            let cards = [];
+            let flippedCards = [];
+            let matchedCards = [];
+            let moves = 0;
+
+            const apiKey = "AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            function createBoard() {
+                cards = shuffle([...ecoIcons, ...ecoIcons]);
+                gameBoard.innerHTML = '';
+                cards.forEach((icon, index) => {
+                    const cardContainer = document.createElement('div');
+                    cardContainer.classList.add('card-container');
+                    cardContainer.dataset.index = index;
+                    cardContainer.dataset.icon = icon;
+                    cardContainer.innerHTML = `
+                        <div class="card-inner">
+                            <div class="card-face front bg-gray-50">?</div>
+                            <div class="card-face back">${icon}</div>
+                        </div>
+                    `;
+                    cardContainer.addEventListener('click', flipCard);
+                    gameBoard.appendChild(cardContainer);
+                });
+            }
+
+            function flipCard(event) {
+                const cardContainer = event.currentTarget;
+                if (flippedCards.length < 2 && !cardContainer.classList.contains('flipped') && !cardContainer.classList.contains('matched')) {
+                    cardContainer.classList.add('flipped');
+                    flippedCards.push(cardContainer);
+                    if (flippedCards.length === 2) {
+                        moves++;
+                        movesEl.textContent = moves;
+                        setTimeout(checkForMatch, 1000);
+                    }
+                }
+            }
+
+            function checkForMatch() {
+                const [card1, card2] = flippedCards;
+                if (card1.dataset.icon === card2.dataset.icon) {
+                    // It's a match!
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    matchedCards.push(card1, card2);
+                    matchesEl.textContent = matchedCards.length / 2;
+                    flippedCards = [];
+
+                    // Show fact for the matched icon
+                    const icon = card1.dataset.icon;
+                    const topic = iconToTopic[icon] || 'eco-friendly living';
+                    getEcoFact(topic);
+
+                } else {
+                    // No match, flip them back
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                }
+            }
+
+            function restartGame() {
+                flippedCards = [];
+                matchedCards = [];
+                moves = 0;
+                movesEl.textContent = 0;
+                matchesEl.textContent = 0;
+                createBoard();
+                messageBox.classList.add('hidden');
+            }
+
+            async function getEcoFact(topic) {
+                factText.textContent = 'Generating a fun fact...';
+                factMessageBox.classList.remove('hidden');
+                factMessageBox.style.display = 'flex'; // Ensure it's visible now
+
+                const payload = {
+                    contents: [{ parts: [{ text: `Provide a single, short, and interesting fact about the topic of '${topic}'.` }] }],
+                    systemInstruction: { parts: [{ text: "You are an eco-friendly educational AI. Provide a concise, single-sentence fact." }] },
+                };
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const fact = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (fact) {
+                        factText.textContent = fact;
+                    } else {
+                        throw new Error('No fact received from API.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching eco fact:', error);
+                    factText.textContent = 'Oops! Couldn\'t fetch a fact right now. Please try again later.';
+                }
+            }
+
+            // Fix: Check for game win after the fact box is closed to avoid modal overlap.
+            factCloseBtn.addEventListener('click', () => {
+                factMessageBox.classList.add('hidden');
+                factMessageBox.style.display = 'none'; // Ensure it's hidden now
+                // Check if the game is won now that the fact box is closed
+                if (matchedCards.length === cards.length) {
+                    finalMovesEl.textContent = moves;
+                    messageBox.classList.remove('hidden');
+                }
+            });
+
+            restartBtn.addEventListener('click', restartGame);
+            createBoard();
+        });
+    </script>
+</body>
+</html>

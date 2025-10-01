@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoXnature - Guess the Image</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            overflow-x: hidden;
+        }
+        .rotate-planet {
+            animation: rotatePlanet 30s linear infinite;
+        }
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="landing_page.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <svg class="rotate-planet" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 11C10.34 11 9 12.34 9 14C9 15.66 10.34 17 12 17C13.66 17 15 15.66 15 14C15 12.34 13.66 11 12 11Z" fill="#22C55E"/>
+                        </svg>
+                    </div>
+                    <span class="text-3xl font-extrabold text-green-600">EcoXnature</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-gray-600 font-medium">
+                    <a href="/" class="hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="/about" class="hover:text-green-600 transition-colors duration-200">About</a>
+                    <a href="/features" class="hover:text-green-600 transition-colors duration-200">Features</a>
+                    <a href="/dashboard" class="hover:text-green-600 transition-colors duration-200">Dashboard</a>
+                    <a href="/games" class="text-green-600 font-bold">Games</a>
+                </div>
+            </div>
+            <a href="login.html" id="logout-btn" class="px-5 py-2.5 rounded-full text-white bg-red-500 hover:bg-red-600 font-medium transition-colors duration-300">
+                Logout
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg">
+            <!-- Guess the Image Game -->
+            <div class="mb-12">
+                <h1 class="text-4xl font-extrabold text-green-700 mb-4 text-center">🖼️ Guess the Eco-Image</h1>
+                <p class="text-lg text-gray-600 mb-8 text-center">Guess the eco-friendly word from the image!</p>
+
+                <div class="flex flex-col items-center">
+                    <div id="image-container" class="w-full max-w-lg h-96 bg-gray-100 rounded-xl shadow-inner flex items-center justify-center p-4 mb-6">
+                        <img id="generated-image" class="w-full h-full object-contain hidden" />
+                        <div id="image-loading" class="text-gray-500 animate-pulse hidden">Generating image...</div>
+                        <div id="image-placeholder" class="text-gray-400 text-center">
+                            Click 'New Image' to begin!
+                        </div>
+                    </div>
+
+                    <div id="guess-section" class="w-full max-w-lg hidden">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <input type="text" id="guess-input" class="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter your guess">
+                            <button id="guess-btn" class="px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                                Guess
+                            </button>
+                        </div>
+                        <p id="guess-feedback" class="text-center text-lg font-medium"></p>
+                    </div>
+
+                    <!-- Hint Section -->
+                    <div id="hint-section" class="w-full max-w-lg hidden mb-4 text-center">
+                        <p id="hint-text" class="text-gray-600 italic"></p>
+                        <button id="listen-hint-btn" class="px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300 mt-2">
+                            Listen to Hint 🔊
+                        </button>
+                    </div>
+
+                    <div class="mt-4 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                        <button id="new-image-btn" class="px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                            New Image ✨
+                        </button>
+                        <button id="hint-btn" class="px-6 py-3 rounded-full text-white bg-green-500 hover:bg-green-600 font-bold transition-colors duration-300">
+                            Get a Hint ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-green-700 text-white py-6 mt-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 EcoXnature. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const newImageBtn = document.getElementById('new-image-btn');
+            const generatedImage = document.getElementById('generated-image');
+            const imageLoading = document.getElementById('image-loading');
+            const imagePlaceholder = document.getElementById('image-placeholder');
+            const guessSection = document.getElementById('guess-section');
+            const guessInput = document.getElementById('guess-input');
+            const guessBtn = document.getElementById('guess-btn');
+            const guessFeedback = document.getElementById('guess-feedback');
+            const hintBtn = document.getElementById('hint-btn');
+            const hintSection = document.getElementById('hint-section');
+            const hintText = document.getElementById('hint-text');
+            const listenHintBtn = document.getElementById('listen-hint-btn');
+
+            const ecoWords = [
+                'Recycling', 'Renewable', 'Compost', 'Biodiversity', 'Solar power',
+                'Wind turbine', 'Reforestation', 'Conservation', 'Ecosystem', 'Pollution'
+            ];
+            let currentWord = '';
+            let hintUsed = false;
+
+            const imageGenerationApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs`;
+            const textGenerationApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs`;
+            const ttsApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=AIzaSyBBq9RdD_FSpnaNSpG_7FcgXE48M1TeeGs`;
+
+            // Helper function to convert PCM audio data to a WAV file
+            function pcmToWav(pcmData, sampleRate) {
+                const wavHeader = new ArrayBuffer(44);
+                const view = new DataView(wavHeader);
+                const writeString = (str) => {
+                    for (let i = 0; i < str.length; i++) {
+                        view.setUint8(i, str.charCodeAt(i));
+                    }
+                };
+
+                // RIFF chunk
+                writeString('RIFF');
+                view.setUint32(4, 36 + pcmData.byteLength, true);
+                writeString('WAVE');
+
+                // fmt chunk
+                writeString('fmt ');
+                view.setUint32(16, 16, true);
+                view.setUint16(20, 1, true); // PCM format
+                view.setUint16(22, 1, true); // 1 channel
+                view.setUint32(24, sampleRate, true);
+                view.setUint32(28, sampleRate * 2, true); // Byte rate
+                view.setUint16(32, 2, true); // Block align
+                view.setUint16(34, 16, true); // Bits per sample
+
+                // data chunk
+                writeString('data');
+                view.setUint32(40, pcmData.byteLength, true);
+
+                const wavBuffer = new Uint8Array(wavHeader.byteLength + pcmData.byteLength);
+                wavBuffer.set(new Uint8Array(wavHeader), 0);
+                wavBuffer.set(new Uint8Array(pcmData), wavHeader.byteLength);
+
+                return new Blob([wavBuffer], { type: 'audio/wav' });
+            }
+
+            async function generateNewImage() {
+                // Pick a new random word and set up UI
+                currentWord = ecoWords[Math.floor(Math.random() * ecoWords.length)].toLowerCase();
+                hintUsed = false;
+                generatedImage.classList.add('hidden');
+                imagePlaceholder.classList.add('hidden');
+                imageLoading.classList.remove('hidden');
+                guessSection.classList.add('hidden');
+                hintSection.classList.add('hidden');
+                guessInput.value = '';
+                guessFeedback.textContent = '';
+                guessBtn.disabled = true;
+                newImageBtn.disabled = true;
+                hintBtn.disabled = true;
+
+                const payload = {
+                    instances: {
+                        prompt: `A beautiful, stylized illustration of the word '${currentWord}' in a vibrant, eco-friendly style.`
+                    },
+                    parameters: { "sampleCount": 1 }
+                };
+
+                try {
+                    const response = await fetch(imageGenerationApiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const base64Data = result?.predictions?.[0]?.bytesBase64Encoded;
+
+                    if (base64Data) {
+                        const imageUrl = `data:image/png;base64,${base64Data}`;
+                        generatedImage.src = imageUrl;
+                        generatedImage.classList.remove('hidden');
+                        guessSection.classList.remove('hidden');
+                        hintBtn.disabled = false;
+                        guessInput.focus();
+                    } else {
+                        throw new Error('No image data received from API');
+                    }
+
+                } catch (error) {
+                    console.error('Error generating image:', error);
+                    imagePlaceholder.textContent = 'Failed to generate image. Please try again.';
+                    imagePlaceholder.classList.remove('hidden');
+                } finally {
+                    imageLoading.classList.add('hidden');
+                    guessBtn.disabled = false;
+                    newImageBtn.disabled = false;
+                }
+            }
+
+            async function getHint() {
+                if (hintUsed) return;
+                hintBtn.disabled = true;
+                listenHintBtn.disabled = true;
+                hintText.textContent = 'Generating hint...';
+                hintSection.classList.remove('hidden');
+
+                const payload = {
+                    contents: [{ parts: [{ text: `Provide a single, short, and creative hint for the eco-friendly word '${currentWord}' without revealing the answer directly.` }] }],
+                    systemInstruction: { parts: [{ text: "You are a helpful and creative puzzle master. Provide a one-sentence hint." }] },
+                };
+
+                try {
+                    const response = await fetch(textGenerationApiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const hint = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (hint) {
+                        hintText.textContent = hint;
+                        hintUsed = true;
+                        listenHintBtn.disabled = false;
+                    } else {
+                        throw new Error('No hint received from API.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching hint:', error);
+                    hintText.textContent = 'Failed to get a hint. Try a new image!';
+                } finally {
+                    hintBtn.disabled = hintUsed;
+                }
+            }
+
+            async function listenToHint() {
+                listenHintBtn.disabled = true;
+                const originalText = hintText.textContent;
+                hintText.textContent = 'Generating audio...';
+
+                const payload = {
+                    contents: [{ parts: [{ text: originalText }] }],
+                    generationConfig: {
+                        responseModalities: ["AUDIO"],
+                        speechConfig: {
+                            voiceConfig: {
+                                prebuiltVoiceConfig: { voiceName: "Puck" }
+                            }
+                        }
+                    },
+                    model: "gemini-2.5-flash-preview-tts"
+                };
+
+                try {
+                    const response = await fetch(ttsApiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const part = result?.candidates?.[0]?.content?.parts?.[0];
+                    const audioData = part?.inlineData?.data;
+                    const mimeType = part?.inlineData?.mimeType;
+                    const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+
+                    if (audioData) {
+                        const pcmData = Uint8Array.from(atob(audioData), c => c.charCodeAt(0));
+                        const pcm16 = new Int16Array(pcmData.buffer);
+                        const wavBlob = pcmToWav(pcm16, sampleRate);
+                        const audioUrl = URL.createObjectURL(wavBlob);
+                        const audio = new Audio(audioUrl);
+                        audio.play();
+                    } else {
+                        throw new Error('No audio data received from API.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching TTS audio:', error);
+                    alert('Oops! An error occurred while generating audio. Please try again later.');
+                } finally {
+                    hintText.textContent = originalText;
+                    listenHintBtn.disabled = false;
+                }
+            }
+
+            function checkGuess() {
+                const guess = guessInput.value.trim().toLowerCase();
+                if (!guess) {
+                    guessFeedback.textContent = 'Please enter a guess.';
+                    guessFeedback.classList.remove('text-green-600', 'text-red-600');
+                    return;
+                }
+
+                if (guess === currentWord) {
+                    guessFeedback.textContent = 'Correct! 🎉 You got it!';
+                    guessFeedback.classList.remove('text-red-600');
+                    guessFeedback.classList.add('text-green-600');
+                    guessSection.classList.add('hidden');
+                    hintSection.classList.add('hidden');
+                    newImageBtn.focus();
+                } else {
+                    guessFeedback.textContent = 'Incorrect. Try again!';
+                    guessFeedback.classList.remove('text-green-600');
+                    guessFeedback.classList.add('text-red-600');
+                }
+            }
+
+            newImageBtn.addEventListener('click', generateNewImage);
+            guessBtn.addEventListener('click', checkGuess);
+            hintBtn.addEventListener('click', getHint);
+            listenHintBtn.addEventListener('click', listenToHint);
+            guessInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    checkGuess();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
